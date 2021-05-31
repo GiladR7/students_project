@@ -1,0 +1,110 @@
+.form {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: white;
+  padding: 20px 30px;
+  border-top: #6610f2 4px solid;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-bottom: 15px;
+}
+.form-header {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+}
+
+label.btn {
+  background-color: white;
+  color: black;
+  border: black 1px solid;
+}
+.is-invalid label.btn {
+  border: 1px solid red;
+}
+
+.row {
+  margin: 0px;
+}
+
+.addStudentBtn {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.studentProfile {
+  width: 100%;
+  height: 295px;
+}
+.student-item-container {
+  border: 1px solid black;
+  border-radius: 20px;
+  background-color: #76bdcb;
+}
+.student-item-container tr:nth-child(even) {
+  background-color: #a9d9e3;
+}
+/* .student-item-container tr:nth-child(odd) {
+  background-color: white;
+} */
+
+.student-item-container {
+  padding-top: 15px;
+}
+
+select.sort-by {
+  display: inline-block;
+  width: auto;
+  position: relative;
+  top: 2px;
+}
+
+.students-list-head tr {
+  background-color: #76bdcb;
+  color: white;
+}
+.student-list-body tr:nth-child(odd) {
+  background-color: #74a6b0;
+  color: black;
+}
+
+.student-list-body tr:nth-child(even) {
+  background-color: #76bdcb;
+  color: black;
+}
+.student-list-body tr:hover {
+  background-color: #355156;
+  color: white;
+}
+.close-from {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  cursor: pointer;
+}
+
+.main::after {
+  z-index: -1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  content: "";
+  background-image: url("img/study.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.addBtn {
+  background-color: #355156;
+}
+
+.addBtn:focus {
+  background-color: #355156;
+  border: 0px;
+}
+
+.addBtn:hover {
+  background-color: #355156;
+}
