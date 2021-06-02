@@ -3,10 +3,10 @@ import { Container, Row, Col, Button, Table, Form } from "react-bootstrap";
 
 import StudentItem from "./StudentItem";
 export default function StudentList({
-  showForm,
   getStudents,
   getStudent,
   sortBy,
+  openModal,
 }) {
   const [getDetails, setDetails] = useState("");
 
@@ -22,8 +22,8 @@ export default function StudentList({
           <Table size="sm" className="students-list-head">
             <thead className="text-center">
               <tr>
-                <th colSpan="2">
-                  <Button className="addBtn" onClick={() => showForm()}>
+                <th>
+                  <Button className="addBtn" onClick={() => openModal(true)}>
                     Add Student
                   </Button>{" "}
                   <Form.Control
@@ -35,13 +35,11 @@ export default function StudentList({
                   >
                     <option>Sort By...</option>
                     <option>Name</option>
-                    <option>Average</option>
                   </Form.Control>
                 </th>
               </tr>
               <tr>
                 <th>StundetName</th>
-                <th>StudentAverage</th>
               </tr>
             </thead>
             <tbody className="student-list-body">
@@ -50,12 +48,11 @@ export default function StudentList({
                   <tr
                     className="student-row"
                     key={index}
-                    onClick={(e) => {
+                    onClick={() => {
                       getUserDetails(stundet.id);
                     }}
                   >
                     <td>{stundet.user}</td>
-                    <td>{stundet.avg}</td>
                   </tr>
                 );
               })}
