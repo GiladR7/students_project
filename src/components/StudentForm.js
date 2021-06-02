@@ -18,7 +18,7 @@ import TextInput from "./TextInput";
 import { useState } from "react";
 import ToggleButton from "react-bootstrap/ToggleButton";
 import FormHeader from "./fromHeader";
-export default function StudentForm({ sendFrom, closeForm }) {
+export default function StudentForm({ sendForm, closeModal }) {
   const [inputsData, setInputsData] = useState({
     user: {
       errors: [],
@@ -115,15 +115,12 @@ export default function StudentForm({ sendFrom, closeForm }) {
         return;
       }
     }
-    const obj = {};
+    const student = {};
     for (const key in inputsData) {
-      obj[key] = inputsData[key].value;
+      student[key] = inputsData[key].value;
     }
-    sendFrom(obj);
-    closeForm();
-    for (const key in inputsData) {
-      InputOnChange({ value: "", name: key });
-    }
+    sendForm(student);
+    closeModal(false);
   };
 
   return (
@@ -134,7 +131,7 @@ export default function StudentForm({ sendFrom, closeForm }) {
           onSubmit(e);
         }}
       >
-        <FormHeader closeForm={closeForm} />
+        <FormHeader />
         <Row>
           <Col md="6">
             <TextInput

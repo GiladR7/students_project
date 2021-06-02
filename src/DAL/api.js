@@ -1,68 +1,85 @@
 let students = [
   {
     id: 1,
-    user: "Gilad",
+    user: "Car",
     email: "giladr777@gmail.com",
     address: "Hasksla 13 nesher",
     course: "JavaScript",
     gender: "male",
-    avg: 88,
   },
   {
     id: 2,
-    user: "Yoni",
+    user: "Ab",
     email: "yoni1994@gmail.com",
     address: "Hasksla 13 nesher",
     course: "Node",
     gender: "male",
-    avg: 95,
   },
   {
     id: 3,
-    user: "Avi",
+    user: "Ba",
     email: "yoni1994@gmail.com",
     address: "Hasksla 13 nesher",
     course: "Node",
     gender: "male",
-    avg: 95,
   },
 ];
+function sortByName(a, b) {
+  const name1 = a.user.toLocaleLowerCase();
+  const name2 = b.user.toLocaleLowerCase();
+  if (name1 > name2) {
+    return 1;
+  } else if (name2 > name1) {
+    return -1;
+  } else {
+    return 0;
+  }
+}
+
+let studentsSortByName = [...students].sort(sortByName);
 
 function getStudents() {
   if (localStorage.getItem("students")) {
     students = JSON.parse(localStorage.getItem("students"));
+    studentsSortByName = [...JSON.parse(localStorage.getItem("students"))].sort(
+      sortByName
+    );
   } else {
     localStorage.setItem("students", JSON.stringify(students));
   }
   return [...students];
 }
 
-function sortByName(students) {
-  return students.sort((a, b) => {
-    const name1 = a.user.toLocaleLowerCase();
-    const name2 = b.user.toLocaleLowerCase();
-    if (name1 > name2) {
-      return 1;
-    } else if (name2 > name1) {
-      return -1;
-    } else {
-      return 0;
-    }
-  });
-}
 function getStudent(id) {
   return students.filter((student) => {
-    console.log(student.id, id);
-    return student.id == id;
+    return student.id === id;
   });
+}
+
+function getSortOrUnSortArr(sortBy) {
+  if (sortBy === "Name") {
+    return studentsSortByName;
+  } else {
+    return students;
+  }
 }
 
 function addStudent(newStudent) {
-  const avg = Math.floor(Math.random() * 101);
-  newStudent.avg = avg;
   newStudent.id = students.length + 1;
   students.push(newStudent);
+  addStudetToSortedArr(newStudent);
   localStorage.setItem("students", JSON.stringify(students));
 }
 
-export { getStudents, getStudent, addStudent };
+function addStudetToSortedArr(student) {
+  for (const [index, { user }] of studentsSortByName.entries()) {
+    console.log(student.user.toLocaleLowerCase() <= user.toLocaleLowerCase());
+    if (student.user.toLocaleLowerCase() <= user.toLocaleLowerCase()) {
+      studentsSortByName.splice(index, 0, student);
+      return;
+    }
+  }
+  studentsSortByName.splice(studentsSortByName.length, 0, student);
+}
+
+export { getStudents, getStudent, addStudent, getSortOrUnSortArr };

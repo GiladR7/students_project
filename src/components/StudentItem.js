@@ -37,18 +37,20 @@ export default function StudentItem({ studentsDetails }) {
         <Col sm={8}>
           <Table responsive>
             <tbody>
-              {Object.entries(studentsDetails).map(([key, value], index) => {
-                return key !== "id" ? (
-                  <tr key={index}>
-                    <th>
-                      <FontAwesomeIcon icon={icons[key]} /> {key}
-                    </th>
-                    <td>{value}</td>
-                  </tr>
-                ) : (
-                  ""
-                );
-              })}
+              {Object.entries(studentsDetails)
+                .map(([key, value], index) => {
+                  return key !== "id" ? (
+                    <tr key={index}>
+                      <th>
+                        <FontAwesomeIcon icon={icons[key]} /> {key}
+                      </th>
+                      <td>{value}</td>
+                    </tr>
+                  ) : (
+                    ""
+                  );
+                })
+                .filter((value) => !!value)}
             </tbody>
           </Table>
         </Col>
