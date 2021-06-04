@@ -24,9 +24,9 @@ export default function StudentItem({ studentsDetails }) {
         <Col sm={4}>
           <Image
             src={
-              studentsDetails.gender === "male"
+              studentsDetails.gender === "Male"
                 ? `https://randomuser.me/api/portraits/men/${studentsDetails.id}.jpg`
-                : studentsDetails.gender === "female"
+                : studentsDetails.gender === "Female"
                 ? `https://randomuser.me/api/portraits/women/${studentsDetails.id}.jpg`
                 : stundetImg
             }
@@ -35,7 +35,7 @@ export default function StudentItem({ studentsDetails }) {
           />
         </Col>
         <Col sm={8}>
-          <Table responsive>
+          <Table responsive borderless className="table-student-details">
             <tbody>
               {Object.entries(studentsDetails)
                 .map(([key, value], index) => {

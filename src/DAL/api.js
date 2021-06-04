@@ -1,29 +1,4 @@
-let students = [
-  {
-    id: 1,
-    user: "Car",
-    email: "giladr777@gmail.com",
-    address: "Hasksla 13 nesher",
-    course: "JavaScript",
-    gender: "male",
-  },
-  {
-    id: 2,
-    user: "Ab",
-    email: "yoni1994@gmail.com",
-    address: "Hasksla 13 nesher",
-    course: "Node",
-    gender: "male",
-  },
-  {
-    id: 3,
-    user: "Ba",
-    email: "yoni1994@gmail.com",
-    address: "Hasksla 13 nesher",
-    course: "Node",
-    gender: "male",
-  },
-];
+let students = [];
 function sortByName(a, b) {
   const name1 = a.user.toLocaleLowerCase();
   const name2 = b.user.toLocaleLowerCase();
