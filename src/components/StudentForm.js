@@ -47,7 +47,7 @@ export default function StudentForm({ sendForm, closeModal }) {
       validation: {
         customError: "Address should be no less than 10 characters.",
         required: true,
-        regex: /[\w\s.,]{10,}/,
+        regex: /[\w\s.,-]{10,}/,
         isInVaild: false,
       },
     },
@@ -70,8 +70,6 @@ export default function StudentForm({ sendForm, closeModal }) {
   });
 
   function validationInputs({ value, name }) {
-    if (name === "course" && value === "Select Course") value = "";
-
     const errors = [];
     let isInValid = false;
 
@@ -131,7 +129,7 @@ export default function StudentForm({ sendForm, closeModal }) {
           onSubmit(e);
         }}
       >
-        <FormHeader />
+        <FormHeader closeForm={closeModal} />
         <Row>
           <Col md="6">
             <TextInput
@@ -216,7 +214,7 @@ export default function StudentForm({ sendForm, closeModal }) {
                     validationInputs(e.target);
                   }}
                 >
-                  <option>Select Course</option>
+                  <option value="">Select Course</option>
                   <option>JavaScript</option>
                   <option>React</option>
                   <option>Python</option>
@@ -247,9 +245,9 @@ export default function StudentForm({ sendForm, closeModal }) {
                     validationInputs({ value: e, name: "gender" });
                   }}
                 >
-                  <ToggleButton value="male">Male</ToggleButton>
-                  <ToggleButton value="female">Female</ToggleButton>
-                  <ToggleButton value="other">Other </ToggleButton>
+                  <ToggleButton value="Male">Male</ToggleButton>
+                  <ToggleButton value="Female">Female</ToggleButton>
+                  <ToggleButton value="Other">Other </ToggleButton>
                 </ToggleButtonGroup>
 
                 {inputsData.gender.errors.map((error, index) => {

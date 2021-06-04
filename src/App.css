@@ -7,6 +7,9 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   margin-bottom: 15px;
 }
+body {
+  font-family: "Roboto Condensed";
+}
 .form-header {
   max-width: 800px;
   margin: 0 auto;
@@ -35,14 +38,26 @@ label.btn {
   width: 100%;
   height: 243px;
 }
+.col-md-8 {
+  position: relative;
+}
+
 .student-item-container {
   border: 1px solid black;
   border-radius: 20px;
-  background-color: #76bdcb;
+  margin-top: 20px;
+  position: sticky;
+  top: 0px;
+  background-color: #0fa8aa;
   padding: 15px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
 .student-item-container tr:nth-child(even) {
-  background-color: #a9d9e3;
+  background-color: #76bdcb;
+}
+.student-item-container tr:nth-child(odd) {
+  background-color: #07acaf;
 }
 
 .table {
@@ -55,29 +70,24 @@ select.sort-by {
   position: relative;
   top: 2px;
 }
-
-.students-list-head tr {
-  background-color: #76bdcb;
+.students-list-head thead {
+  background-color: #f5854e;
   color: white;
-}
-.student-list-body tr:nth-child(odd) {
-  background-color: #74a6b0;
-}
-
-.student-list-body tr:nth-child(even) {
-  background-color: #76bdcb;
+  border: 1px solid black;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.student-list-body tr {
+.student-list-body tr:hover {
+  background-color: #ffffffe0;
+  border: 1px solid black;
+}
+.student-list-body {
+  background-color: #ffffff87;
   color: black;
   text-align: center;
-  font-size: 20px;
+  border: 1px solid black;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-.student-list-body tr:hover {
-  background-color: #355156;
-  color: white;
-}
-
 .close-from {
   position: absolute;
   top: 0px;
@@ -99,15 +109,19 @@ select.sort-by {
   background-repeat: no-repeat;
 }
 
-.addBtn {
-  background-color: #355156;
-}
-
-.addBtn:focus {
-  background-color: #355156;
+.modal-content {
+  position: relative;
+  background-color: #ffffff00;
   border: 0px;
 }
-
-.addBtn:hover {
-  background-color: #355156;
+.modal-content::after {
+  background-color: black;
+  opacity: -0.5;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  content: "";
+  right: 0;
+  bottom: 0;
+  position: absolute;
 }

@@ -19,11 +19,11 @@ export default function StudentList({
     <Container fluid>
       <Row>
         <Col md={4}>
-          <Table size="sm" className="students-list-head">
+          <Table borderless className="students-list-head">
             <thead className="text-center">
               <tr>
                 <th>
-                  <Button className="addBtn" onClick={() => openModal(true)}>
+                  <Button variant="info" onClick={() => openModal(true)}>
                     Add Student
                   </Button>{" "}
                   <Form.Control
@@ -43,19 +43,25 @@ export default function StudentList({
               </tr>
             </thead>
             <tbody className="student-list-body">
-              {getStudents.map((stundet, index) => {
-                return (
-                  <tr
-                    className="student-row"
-                    key={index}
-                    onClick={() => {
-                      getUserDetails(stundet.id);
-                    }}
-                  >
-                    <td>{stundet.user}</td>
-                  </tr>
-                );
-              })}
+              {getStudents.length === 0 ? (
+                <tr className="student-row">
+                  <td>No Students to Show</td>
+                </tr>
+              ) : (
+                getStudents.map((stundet, index) => {
+                  return (
+                    <tr
+                      className="student-row"
+                      key={index}
+                      onClick={() => {
+                        getUserDetails(stundet.id);
+                      }}
+                    >
+                      <td>{stundet.user}</td>
+                    </tr>
+                  );
+                })
+              )}
             </tbody>
           </Table>
         </Col>
