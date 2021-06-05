@@ -1,20 +1,18 @@
-import InputGroup from "react-bootstrap/InputGroup";
-import Form from "react-bootstrap/Form";
+import { Form, InputGroup } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-export default function TextInput({
-  errors,
-  iconName,
-  inputType,
-  labelText,
-  placeholderData,
+
+export default function Select({
+  inputValue,
   name,
-  validInput,
-  value,
-  inputChange,
-  inputValidtion,
+  validationInputs,
+  labelText,
+  isInVaildInput,
+  iconName,
+  errors,
+  selectOptions,
 }) {
   return (
-    <Form.Group className="mb-3">
+    <Form.Group>
       <Form.Label>{labelText}</Form.Label>
       <InputGroup hasValidation>
         <InputGroup.Prepend>
@@ -23,18 +21,22 @@ export default function TextInput({
           </InputGroup.Text>
         </InputGroup.Prepend>
         <Form.Control
-          type={inputType}
-          isInvalid={validInput}
-          placeholder={placeholderData}
+          as="select"
+          isInvalid={isInVaildInput}
           name={name}
-          value={value}
+          value={inputValue}
           onChange={(e) => {
-            inputChange(e.target);
+            validationInputs(e.target);
           }}
-          onBlur={(e) => {
-            inputValidtion(e.target);
-          }}
-        />
+        >
+          {selectOptions.map(([value, text], index) => {
+            return (
+              <option key={index} value={value}>
+                {text}
+              </option>
+            );
+          })}
+        </Form.Control>
         {errors.map((error, index) => {
           return (
             <Form.Control.Feedback key={index} type="invalid">

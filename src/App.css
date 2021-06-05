@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 .form {
   max-width: 800px;
   margin: 0 auto;
@@ -41,29 +45,39 @@ label.btn {
 .col-md-8 {
   position: relative;
 }
-
+.close-item {
+  position: absolute;
+  font-size: 20px;
+  right: 16px;
+  top: 8px;
+  cursor: pointer;
+}
 .student-item-container {
   border: 1px solid black;
   border-radius: 20px;
   margin-top: 20px;
   position: sticky;
   top: 0px;
-  background-color: #0fa8aa;
-  padding: 15px;
+  background-color: #00acaf;
+  padding: 15px 15px 3px 15px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.student-item-container tr:nth-child(even) {
-  background-color: #76bdcb;
+.student-item-container tr {
+  background-color: #00acaf;
 }
-.student-item-container tr:nth-child(odd) {
-  background-color: #07acaf;
+
+.student-item-container tr:hover {
+  background-color: #034142;
+  color: white;
 }
 
 .table {
   margin-bottom: 0px;
 }
-
+.studentProfile {
+  margin-bottom: 15px;
+}
 select.sort-by {
   display: inline-block;
   width: auto;
@@ -79,7 +93,6 @@ select.sort-by {
 
 .student-list-body tr:hover {
   background-color: #ffffffe0;
-  border: 1px solid black;
 }
 .student-list-body {
   background-color: #ffffff87;

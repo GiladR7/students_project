@@ -1,6 +1,8 @@
 import { Container, Row, Col, Image, Table } from "react-bootstrap";
 import stundetImg from "../img/student-profile.PNG";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
+
 import {
   faUserGraduate,
   faBook,
@@ -9,7 +11,7 @@ import {
   faBuilding,
   faVenusMars,
 } from "@fortawesome/free-solid-svg-icons";
-export default function StudentItem({ studentsDetails }) {
+export default function StudentItem({ studentsDetails, setDetails }) {
   const icons = {
     user: faUserGraduate,
     course: faBook,
@@ -21,6 +23,13 @@ export default function StudentItem({ studentsDetails }) {
   return (
     <Container fluid className="student-item-container">
       <Row>
+        <FontAwesomeIcon
+          icon={faTimes}
+          className="close-item"
+          onClick={() => {
+            setDetails("");
+          }}
+        />
         <Col sm={4}>
           <Image
             src={
