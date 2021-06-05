@@ -4,6 +4,7 @@ import StudentForm from "./StudentForm";
 export default function ModalLg({ lgShow, setLgShow, sendForm }) {
   return (
     <Modal
+      backdrop="static"
       size="lg"
       show={lgShow}
       onHide={() => setLgShow(false)}

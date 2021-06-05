@@ -1,20 +1,18 @@
-import InputGroup from "react-bootstrap/InputGroup";
-import Form from "react-bootstrap/Form";
+import { Form, InputGroup } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-export default function TextInput({
-  errors,
-  iconName,
-  inputType,
-  labelText,
-  placeholderData,
+export default function TextArea({
+  placeholderText,
+  inputValue,
   name,
-  validInput,
-  value,
-  inputChange,
-  inputValidtion,
+  validationInputs,
+  labelText,
+  isInVaildInput,
+  iconName,
+  InputOnChange,
+  errors,
 }) {
   return (
-    <Form.Group className="mb-3">
+    <Form.Group>
       <Form.Label>{labelText}</Form.Label>
       <InputGroup hasValidation>
         <InputGroup.Prepend>
@@ -23,16 +21,17 @@ export default function TextInput({
           </InputGroup.Text>
         </InputGroup.Prepend>
         <Form.Control
-          type={inputType}
-          isInvalid={validInput}
-          placeholder={placeholderData}
-          name={name}
-          value={value}
-          onChange={(e) => {
-            inputChange(e.target);
-          }}
+          isInvalid={isInVaildInput}
           onBlur={(e) => {
-            inputValidtion(e.target);
+            validationInputs(e.target);
+          }}
+          as="textarea"
+          name={name}
+          value={inputValue}
+          rows={2}
+          placeholder={placeholderText}
+          onChange={(e) => {
+            InputOnChange(e.target);
           }}
         />
         {errors.map((error, index) => {

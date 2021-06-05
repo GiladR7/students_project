@@ -4,19 +4,13 @@ import {
   faBuilding,
   faGraduationCap,
 } from "@fortawesome/free-solid-svg-icons";
-import InputGroup from "react-bootstrap/InputGroup";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  Container,
-  Row,
-  Form,
-  Col,
-  ToggleButtonGroup,
-  Button,
-} from "react-bootstrap";
+import ToggleButtonGroupInput from "./ToggleButtonGroupInput";
+import { Container, Row, Form, Col, Button } from "react-bootstrap";
+import Select from "./Select";
+import TextArea from "./TextArea";
 import TextInput from "./TextInput";
 import { useState } from "react";
-import ToggleButton from "react-bootstrap/ToggleButton";
+
 import FormHeader from "./fromHeader";
 export default function StudentForm({ sendForm, closeModal }) {
   const [inputsData, setInputsData] = useState({
@@ -103,20 +97,31 @@ export default function StudentForm({ sendForm, closeModal }) {
     });
   }
 
-  const onSubmit = (e) => {
-    e.preventDefault();
+  function checkFromBeforeSubmit() {
+    let isValidForm = true;
     for (const key in inputsData) {
       validationInputs({ value: inputsData[key].value, name: key });
-    }
-    for (const key in inputsData) {
       if (inputsData[key].errors.length !== 0) {
-        return;
+        isValidForm = false;
       }
     }
+    return isValidForm;
+  }
+  function createStundetObj() {
     const student = {};
     for (const key in inputsData) {
       student[key] = inputsData[key].value;
     }
+    return student;
+  }
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    if (!checkFromBeforeSubmit()) {
+      return;
+    }
+
+    const student = createStundetObj();
     sendForm(student);
     closeModal(false);
   };
@@ -133,7 +138,7 @@ export default function StudentForm({ sendForm, closeModal }) {
         <Row>
           <Col md="6">
             <TextInput
-              iconName={<FontAwesomeIcon icon={faUser} />}
+              iconName={faUser}
               labelText="Username"
               inputType="text"
               placeholderData="Enter Username"
@@ -147,7 +152,7 @@ export default function StudentForm({ sendForm, closeModal }) {
           </Col>
           <Col md="6">
             <TextInput
-              iconName={<FontAwesomeIcon icon={faMailBulk} />}
+              iconName={faMailBulk}
               type="text"
               labelText="Email"
               placeholderData="Enter Email"
@@ -162,103 +167,48 @@ export default function StudentForm({ sendForm, closeModal }) {
         </Row>
         <Row>
           <Col>
-            <Form.Group>
-              <Form.Label>Address</Form.Label>
-              <InputGroup hasValidation>
-                <InputGroup.Prepend>
-                  <InputGroup.Text>
-                    <FontAwesomeIcon icon={faBuilding} />
-                  </InputGroup.Text>
-                </InputGroup.Prepend>
-                <Form.Control
-                  isInvalid={inputsData.address.validation.isInVaild}
-                  onBlur={(e) => {
-                    validationInputs(e.target);
-                  }}
-                  as="textarea"
-                  name="address"
-                  value={inputsData.address.value}
-                  rows={2}
-                  placeholder={"Street , Number , City , Zip"}
-                  onChange={(e) => {
-                    InputOnChange(e.target);
-                  }}
-                />
-                {inputsData.address.errors.map((error, index) => {
-                  return (
-                    <Form.Control.Feedback key={index} type="invalid">
-                      {error}
-                    </Form.Control.Feedback>
-                  );
-                })}
-              </InputGroup>
-            </Form.Group>
+            <TextArea
+              inputValue={inputsData.address.value}
+              InputOnChange={InputOnChange}
+              placeholderText="Street , Number , City , Zip"
+              validationInputs={validationInputs}
+              name={"address"}
+              labelText={"Address"}
+              iconName={faBuilding}
+              errors={inputsData.address.errors}
+              isInVaildInput={inputsData.address.validation.isInVaild}
+            />
           </Col>
         </Row>
         <Row>
           <Col md="6">
-            <Form.Group>
-              <Form.Label>Course</Form.Label>
-              <InputGroup hasValidation>
-                <InputGroup.Prepend>
-                  <InputGroup.Text>
-                    <FontAwesomeIcon icon={faGraduationCap} />
-                  </InputGroup.Text>
-                </InputGroup.Prepend>
-                <Form.Control
-                  as="select"
-                  isInvalid={inputsData.course.validation.isInVaild}
-                  name="course"
-                  value={inputsData.course.value}
-                  onChange={(e) => {
-                    validationInputs(e.target);
-                  }}
-                >
-                  <option value="">Select Course</option>
-                  <option>JavaScript</option>
-                  <option>React</option>
-                  <option>Python</option>
-                  <option>Node</option>
-                </Form.Control>
-                {inputsData.course.errors.map((error, index) => {
-                  return (
-                    <Form.Control.Feedback key={index} type="invalid">
-                      {error}
-                    </Form.Control.Feedback>
-                  );
-                })}
-              </InputGroup>
-            </Form.Group>
+            <Select
+              inputValue={inputsData.course.value}
+              name="course"
+              validationInputs={validationInputs}
+              labelText="Course"
+              isInVaildInput={inputsData.course.validation.isInVaild}
+              iconName={faGraduationCap}
+              errors={inputsData.course.errors}
+              selectOptions={[
+                ["", "Select Course"],
+                ["JavaScript", "JavaScript"],
+                ["React", "React"],
+                ["Python", "Python"],
+                ["Node", "Node"],
+              ]}
+            />
           </Col>
           <Col md="6">
-            <Form.Group>
-              <Form.Label>Gender</Form.Label>
-              <InputGroup hasValidation>
-                <ToggleButtonGroup
-                  type="radio"
-                  name="gender"
-                  value={inputsData.gender.value}
-                  className={
-                    inputsData.gender.validation.isInVaild ? "is-invalid" : ""
-                  }
-                  onChange={(e) => {
-                    validationInputs({ value: e, name: "gender" });
-                  }}
-                >
-                  <ToggleButton value="Male">Male</ToggleButton>
-                  <ToggleButton value="Female">Female</ToggleButton>
-                  <ToggleButton value="Other">Other </ToggleButton>
-                </ToggleButtonGroup>
-
-                {inputsData.gender.errors.map((error, index) => {
-                  return (
-                    <Form.Control.Feedback key={index} type="invalid">
-                      {error}
-                    </Form.Control.Feedback>
-                  );
-                })}
-              </InputGroup>
-            </Form.Group>
+            <ToggleButtonGroupInput
+              inputValue={inputsData.gender.value}
+              name="gender"
+              validationInputs={validationInputs}
+              labelText="Gender"
+              isInVaildInput={inputsData.gender.validation.isInVaild}
+              buttonsValue={["Male", "Female", "Other"]}
+              errors={inputsData.gender.errors}
+            />
           </Col>
         </Row>
         <Button className="addStudentBtn" type="submit">

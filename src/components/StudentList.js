@@ -66,7 +66,11 @@ export default function StudentList({
           </Table>
         </Col>
         <Col md={8}>
-          {getDetails ? <StudentItem studentsDetails={getDetails} /> : ""}
+          {getDetails ? (
+            <StudentItem studentsDetails={getDetails} setDetails={setDetails} />
+          ) : (
+            ""
+          )}
         </Col>
       </Row>
     </Container>
